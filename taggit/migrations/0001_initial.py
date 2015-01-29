@@ -1,12 +1,13 @@
-# encoding: utf8
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '__first__'),
+        ('contenttypes', '0001_initial'),
     ]
 
     operations = [
@@ -27,9 +28,9 @@ class Migration(migrations.Migration):
             name='TaggedItem',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('tag', models.ForeignKey(to='taggit.Tag', to_field='id')),
                 ('object_id', models.IntegerField(verbose_name='Object id', db_index=True)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType', to_field='id', verbose_name='Content type')),
+                ('content_type', models.ForeignKey(related_name='taggit_taggeditem_tagged_items', verbose_name='Content type', to='contenttypes.ContentType')),
+                ('tag', models.ForeignKey(related_name='taggit_taggeditem_items', to='taggit.Tag')),
             ],
             options={
                 'verbose_name': 'Tagged Item',
